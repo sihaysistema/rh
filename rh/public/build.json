@@ -1,0 +1,8 @@
+{
+    "rh/js/rh.min.js": [
+        "public/js/main_big_five_test.js"
+    ],
+    "rh/css/rh.min.css": [
+        "public/css/main_big_five_test.css"
+    ]
+}

@@ -48,6 +48,7 @@ export default {
     });
   },
   methods: {
+    // Emision de eventos
     optSelected(option) {
       console.log("Seleccionó: ", option);
     },

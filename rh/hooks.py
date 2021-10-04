@@ -1,4 +1,5 @@
 from . import __version__ as app_version
+from rh.fixtures import fill_fixtures
 
 app_name = "rh"
 app_title = "RH"
@@ -9,12 +10,14 @@ app_color = "grey"
 app_email = "m.monroyc22@gmail.com"
 app_license = "MIT"
 
+fixtures = fill_fixtures()
+
 # Includes in <head>
 # ------------------
 
 # include js, css files in header of desk.html
-# app_include_css = "/assets/rh/css/rh.css"
-# app_include_js = "/assets/rh/js/rh.js"
+app_include_css = "/assets/rh/css/rh.min.css"
+app_include_js = "/assets/rh/js/rh.min.js"
 
 # include js, css files in header of web template
 # web_include_css = "/assets/rh/css/rh.css"

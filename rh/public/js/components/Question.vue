@@ -1,40 +1,68 @@
 <template>
-  <div>
-    <h4 class="font-weight-bold">{{ question.text }}</h4>
+  <div class="mb-4">
+    <h4 class="font-weight-bold">{{ counter }}. {{ question.text }}</h4>
 
-    <div
-      class="custom-control custom-radio"
-      v-for="option in positive_keys"
-      :key="option.text"
-    >
-      <input
-        type="radio"
-        :id="[question.name + '-' + option.value]"
-        :name="[question.name + '-' + option.value]"
-        class="custom-control-input"
-        :value="option.text"
-        v-model="selected"
-        @change="emitirEvento"
-      />
-      <label
-        class="custom-control-label"
-        :for="[question.name + '-' + option.value]"
-        >{{ option.text }}</label
+    <!-- SI la pregunta es de `key` POSITIVA -->
+    <div class="positive_keys mb-2" v-if="question.key === 'POS'">
+      <div
+        class="custom-control custom-radio"
+        v-for="option in positive_keys"
+        :key="option.text"
       >
+        <input
+          type="radio"
+          :id="[question.name + '-' + option.value]"
+          :name="[question.name + '-' + option.value]"
+          class="custom-control-input"
+          :value="option"
+          v-model="selected"
+          @change="emitirEvento"
+        />
+        <label
+          class="custom-control-label"
+          :for="[question.name + '-' + option.value]"
+        >
+          {{ option.text }}</label
+        >
+      </div>
     </div>
-    <br />
-    <span>Eligió: {{ selected }}</span>
-    <br />
-    <br />
+
+    <!-- SI la pregunta es de `key` NEGATIVA -->
+    <div class="positive_keys mb-2" v-if="question.key === 'NEG'">
+      <div
+        class="custom-control custom-radio"
+        v-for="option in negative_keys"
+        :key="option.text"
+      >
+        <input
+          type="radio"
+          :id="[question.name + '-' + option.value]"
+          :name="[question.name + '-' + option.value]"
+          class="custom-control-input"
+          :value="option"
+          v-model="selected"
+          @change="emitirEvento"
+        />
+        <label
+          class="custom-control-label"
+          :for="[question.name + '-' + option.value]"
+        >
+          {{ option.text }}</label
+        >
+      </div>
+    </div>
+
+    <span class="mb-3">Eligió: {{ selected }}</span>
   </div>
 </template>
 
 <script>
 export default {
-  props: ["question"],
+  props: ["counter", "question"],
   data() {
     return {
       selected: "",
+      valueForCalculations: {},
       positive_keys: [
         { text: "Very Inaccurate", value: 1 },
         { text: "Moderately Inaccurate", value: 2 },
@@ -52,8 +80,16 @@ export default {
     };
   },
   methods: {
+    // Emite evento al componente padre, pasando el dato seleccionado
     emitirEvento() {
-      this.$emit("selected", this.selected);
+      this.valueForCalculations = {
+        category: this.question.category,
+        value: this.selected.value,
+        name: this.question.name,
+      };
+
+      this.$emit("selected", this.valueForCalculations);
+      //   console.log("Usar: ", JSON.stringify(this.valueForCalculations));
     },
   },
 };

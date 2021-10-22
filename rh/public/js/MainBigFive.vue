@@ -1,30 +1,34 @@
 <template>
   <div>
-    <div class="progress mb-4" style="height: 25px">
+    <div class="progress mb-4 Const" style="height: 25px">
       <div
         class="progress-bar"
         role="progressbar"
-        style="width: 25%"
-        aria-valuenow="25"
+        :style="progressForm"
+        :aria-valuenow="counter"
         aria-valuemin="0"
         aria-valuemax="100"
       >
-        25%
+        60%
       </div>
     </div>
-    <code>{{ EXTRAVERSION }}</code>
-    <code>{{ AGREEABLENESS }}</code>
-    <code>{{ CONSCIENTIOUSNESS }}</code>
-    <code>{{ NEUROTICISM }}</code>
-    <code>{{ OPENNESS }}</code>
-    <!-- Probar emitir eventos -->
-    <Question
-      v-for="(question, index) in questions"
-      :key="question.name"
-      :question="question"
-      :counter="index + 1"
-      @selected="optSelected($event)"
-    />
+
+    <div>
+      <code>{{ counter }}</code>
+      <Question
+        v-for="(question, index) in questions"
+        :key="question.name"
+        :question="question"
+        :counter="index + 1"
+        @selected="optSelected($event)"
+      />
+
+      <button type="button" class="btn btn-dark mb-4" @click="complete_test()">
+        {{ __("COMPLETAR") }}
+      </button>
+    </div>
+
+    <div id="chart"></div>
   </div>
 </template>
 
@@ -45,6 +49,16 @@ export default {
       CONSCIENTIOUSNESS: [],
       NEUROTICISM: [],
       OPENNESS: [],
+      dd: {
+        labels: [
+          __("EXTRAVERSION"),
+          __("AGREEABLENESS"),
+          __("CONSCIENTIOUSNESS"),
+          __("NEUROTICISM"),
+          __("OPENNESS"),
+        ],
+        datasets: [{ values: [18, 40, 30, 35, 8] }],
+      },
     };
   },
   // Al montarse el componente se obtiene todas las preguntas a mostrar
@@ -57,6 +71,13 @@ export default {
         _this.questions = data.message;
         // console.log(data.message);
       },
+    });
+
+    new frappe.Chart("#chart", {
+      data: this.dd,
+      type: "bar",
+      height: 180,
+      colors: ["red"],
     });
   },
   methods: {
@@ -78,6 +99,7 @@ export default {
           // Si no existe se agrega
           console.log("No existe");
           this.EXTRAVERSION.push(option);
+          this.counter++;
         }
       }
 
@@ -97,6 +119,7 @@ export default {
           // Si no existe se agrega
           console.log("No existe");
           this.AGREEABLENESS.push(option);
+          this.counter++;
         }
       }
 
@@ -118,6 +141,7 @@ export default {
           // Si no existe se agrega
           console.log("No existe");
           this.CONSCIENTIOUSNESS.push(option);
+          this.counter++;
         }
       }
 
@@ -137,6 +161,7 @@ export default {
           // Si no existe se agrega
           console.log("No existe");
           this.NEUROTICISM.push(option);
+          this.counter++;
         }
       }
 
@@ -156,6 +181,7 @@ export default {
           // Si no existe se agrega
           console.log("No existe");
           this.OPENNESS.push(option);
+          this.counter++;
         }
       }
     },
@@ -164,6 +190,34 @@ export default {
       return arrayToVerify.some(function (el) {
         return el.name === name; // true/false
       });
+    },
+    complete_test() {
+      let _this = this;
+
+      frappe.call({
+        method: "rh.api.complete_test",
+        args: {
+          data: {
+            extraversion: this.EXTRAVERSION,
+            agreeableness: this.AGREEABLENESS,
+            conscientiousness: this.CONSCIENTIOUSNESS,
+            neuroticism: this.NEUROTICISM,
+            openness: this.OPENNESS,
+          },
+        },
+        callback: function (data) {
+          //   _this.questions = data.message;
+          // console.log(data.message);
+        },
+      });
+    },
+    contar() {
+      console.log("Presiono");
+    },
+  },
+  computed: {
+    progressForm: function () {
+      return `width: ${this.counter}%`;
     },
   },
 };

@@ -1,6 +1,6 @@
 <template>
   <div class="mb-4">
-    <h4 class="font-weight-bold">{{ counter }}. {{ question.text }}</h4>
+    <h4 class="font-weight-bold">{{ counter }}. {{ __(question.text) }}</h4>
 
     <!-- SI la pregunta es de `key` POSITIVA -->
     <div class="positive_keys mb-2" v-if="question.key === 'POS'">
@@ -22,7 +22,7 @@
           class="custom-control-label"
           :for="[question.name + '-' + option.value]"
         >
-          {{ option.text }}</label
+          {{ __(option.text) }}</label
         >
       </div>
     </div>
@@ -47,7 +47,7 @@
           class="custom-control-label"
           :for="[question.name + '-' + option.value]"
         >
-          {{ option.text }}</label
+          {{ __(option.text) }}</label
         >
       </div>
     </div>

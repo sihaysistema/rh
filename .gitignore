@@ -4,3 +4,5 @@
 *.swp
 tags
 rh/docs/current
+rh/public/js/rh.min.js
+rh/public/js/rh.min.js.map

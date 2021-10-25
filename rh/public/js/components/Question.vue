@@ -52,7 +52,7 @@
       </div>
     </div>
 
-    <span class="mb-3">Eligió: {{ selected }}</span>
+    <!-- <span class="mb-3">Eligió: {{ selected }}</span> -->
   </div>
 </template>
 

@@ -1,36 +1,53 @@
 <template>
   <div>
     <div v-if="completed === false">
-      <div
-        class="progress mb-4 Const"
-        style="height: 25px"
-        v-if="completed === false"
-      >
-        <div
-          class="progress-bar"
-          role="progressbar"
-          :style="progressForm"
-          :aria-valuenow="counter"
-          aria-valuemin="0"
-          aria-valuemax="100"
-        >
-          {{ counter }}%
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-10 position-fixed">
+            <!-- Barra de progreso -->
+            <div
+              class="progress mb-4 mt-4"
+              style="height: 20px"
+              v-if="completed === false"
+            >
+              <div
+                class="progress-bar"
+                role="progressbar"
+                :style="progressForm"
+                :aria-valuenow="counter"
+                aria-valuemin="0"
+                aria-valuemax="100"
+              >
+                {{ counter }}%
+              </div>
+            </div>
+          </div>
+          <!-- DIVISION -->
+          <div class="col-sm-8">
+            <div class="separacion">
+              <!-- Preguntas -->
+              <Question
+                v-for="(question, index) in questions"
+                :key="question.name"
+                :question="question"
+                :counter="index + 1"
+                @selected="optSelected($event)"
+              />
+
+              <button
+                type="button"
+                class="btn btn-dark mb-4"
+                @click="complete_test()"
+              >
+                {{ __("COMPLETAR") }}
+              </button>
+            </div>
+          </div>
         </div>
       </div>
-
-      <Question
-        v-for="(question, index) in questions"
-        :key="question.name"
-        :question="question"
-        :counter="index + 1"
-        @selected="optSelected($event)"
-      />
-
-      <button type="button" class="btn btn-dark mb-4" @click="complete_test()">
-        {{ __("COMPLETAR") }}
-      </button>
     </div>
 
+    <!-- Resultados -->
     <div v-if="completed === true" class="mb-4">
       <h3 class="texto-res">Resultados</h3>
       <p class="texto-res">Fecha y hora: {{ dateTimeTest }}</p>
@@ -237,8 +254,16 @@ export default {
             });
 
             _this.$forceUpdate();
+            frappe.utils.play_sound("submit");
           } else {
             _this.completed = false;
+            frappe.show_alert(
+              {
+                indicator: "red",
+                message: __(r.message[1]),
+              },
+              60
+            );
           }
 
           //   console.log(r.message);
@@ -258,5 +283,19 @@ export default {
 <style scoped>
 .texto-res {
   color: #333c44;
+}
+
+.container {
+  position: relative;
+}
+
+/* Style the header: fixed position (always stay at the top) */
+.position-fixed {
+  background-color: #f9fafa;
+  z-index: 9999;
+}
+
+.separacion {
+  margin-top: 65px;
 }
 </style>

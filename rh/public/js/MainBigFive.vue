@@ -1,20 +1,23 @@
 <template>
   <div>
-    <div class="progress mb-4 Const" style="height: 25px">
+    <div v-if="completed === false">
       <div
-        class="progress-bar"
-        role="progressbar"
-        :style="progressForm"
-        :aria-valuenow="counter"
-        aria-valuemin="0"
-        aria-valuemax="100"
+        class="progress mb-4 Const"
+        style="height: 25px"
+        v-if="completed === false"
       >
-        60%
+        <div
+          class="progress-bar"
+          role="progressbar"
+          :style="progressForm"
+          :aria-valuenow="counter"
+          aria-valuemin="0"
+          aria-valuemax="100"
+        >
+          {{ counter }}%
+        </div>
       </div>
-    </div>
 
-    <div>
-      <code>{{ counter }}</code>
       <Question
         v-for="(question, index) in questions"
         :key="question.name"
@@ -28,6 +31,11 @@
       </button>
     </div>
 
+    <div v-if="completed === true" class="mb-4">
+      <h3 class="texto-res">Resultados</h3>
+      <p class="texto-res">Fecha y hora: {{ dateTimeTest }}</p>
+      <p class="texto-res">Test completado por: {{ userTest }}</p>
+    </div>
     <div id="chart"></div>
   </div>
 </template>
@@ -41,6 +49,9 @@ export default {
   },
   data() {
     return {
+      dateTimeTest: "",
+      userTest: "",
+      completed: false,
       counter: 0,
       questions: [],
       responseByCategory: [],
@@ -57,7 +68,7 @@ export default {
           __("NEUROTICISM"),
           __("OPENNESS"),
         ],
-        datasets: [{ values: [18, 40, 30, 35, 8] }],
+        datasets: [{ values: [0, 0, 0, 0, 0] }], // Valores default para graficas
       },
     };
   },
@@ -72,39 +83,32 @@ export default {
         // console.log(data.message);
       },
     });
-
-    new frappe.Chart("#chart", {
-      data: this.dd,
-      type: "bar",
-      height: 180,
-      colors: ["red"],
-    });
   },
   methods: {
     // Emision de eventos: ver componente Question.vue => emitirEvento()
     optSelected(option) {
-      console.log("Seleccionó: ", JSON.stringify(option));
+      //   console.log("Seleccionó: ", JSON.stringify(option));
       if (option.category === "EXTRAVERSION") {
-        console.log("ES EXTRAVERSION");
+        // console.log("ES EXTRAVERSION");
         // Si el elemento ya existe en el array, se elimina y se vuelve a agregar
         let index = this.EXTRAVERSION.findIndex((x) => x.name === option.name);
 
         // Si el valor ya existe en el array, se elimina para volverlo a agregarlo
         // asi asegurar que los calculos se generen correctamente
         if (index >= 0) {
-          console.log("Ya existe");
+          //   console.log("Ya existe");
           this.EXTRAVERSION.splice(index, 1);
           this.EXTRAVERSION.push(option);
         } else {
           // Si no existe se agrega
-          console.log("No existe");
+          //   console.log("No existe");
           this.EXTRAVERSION.push(option);
           this.counter++;
         }
       }
 
       if (option.category === "AGREEABLENESS") {
-        console.log("ES AGREEABLENESS");
+        // console.log("ES AGREEABLENESS");
 
         // Si el elemento ya existe en el array, se elimina y se vuelve a agregar
         let index = this.AGREEABLENESS.findIndex((x) => x.name === option.name);
@@ -112,19 +116,19 @@ export default {
         // Si el valor ya existe en el array, se elimina para volverlo a agregarlo
         // asi asegurar que los calculos se generen correctamente
         if (index >= 0) {
-          console.log("Ya existe");
+          //   console.log("Ya existe");
           this.AGREEABLENESS.splice(index, 1);
           this.AGREEABLENESS.push(option);
         } else {
           // Si no existe se agrega
-          console.log("No existe");
+          //   console.log("No existe");
           this.AGREEABLENESS.push(option);
           this.counter++;
         }
       }
 
       if (option.category === "CONSCIENTIOUSNESS") {
-        console.log("ES CONSCIENTIOUSNESS");
+        // console.log("ES CONSCIENTIOUSNESS");
 
         // Si el elemento ya existe en el array, se elimina y se vuelve a agregar
         let index = this.CONSCIENTIOUSNESS.findIndex(
@@ -134,19 +138,19 @@ export default {
         // Si el valor ya existe en el array, se elimina para volverlo a agregarlo
         // asi asegurar que los calculos se generen correctamente
         if (index >= 0) {
-          console.log("Ya existe");
+          //   console.log("Ya existe");
           this.CONSCIENTIOUSNESS.splice(index, 1);
           this.CONSCIENTIOUSNESS.push(option);
         } else {
           // Si no existe se agrega
-          console.log("No existe");
+          //   console.log("No existe");
           this.CONSCIENTIOUSNESS.push(option);
           this.counter++;
         }
       }
 
       if (option.category === "NEUROTICISM") {
-        console.log("ES NEUROTICISM");
+        // console.log("ES NEUROTICISM");
 
         // Si el elemento ya existe en el array, se elimina y se vuelve a agregar
         let index = this.NEUROTICISM.findIndex((x) => x.name === option.name);
@@ -154,19 +158,19 @@ export default {
         // Si el valor ya existe en el array, se elimina para volverlo a agregarlo
         // asi asegurar que los calculos se generen correctamente
         if (index >= 0) {
-          console.log("Ya existe");
+          //   console.log("Ya existe");
           this.NEUROTICISM.splice(index, 1);
           this.NEUROTICISM.push(option);
         } else {
           // Si no existe se agrega
-          console.log("No existe");
+          //   console.log("No existe");
           this.NEUROTICISM.push(option);
           this.counter++;
         }
       }
 
       if (option.category === "OPENNESS") {
-        console.log("ES OPENNESS");
+        // console.log("ES OPENNESS");
 
         // Si el elemento ya existe en el array, se elimina y se vuelve a agregar
         let index = this.OPENNESS.findIndex((x) => x.name === option.name);
@@ -174,12 +178,12 @@ export default {
         // Si el valor ya existe en el array, se elimina para volverlo a agregarlo
         // asi asegurar que los calculos se generen correctamente
         if (index >= 0) {
-          console.log("Ya existe");
+          //   console.log("Ya existe");
           this.OPENNESS.splice(index, 1);
           this.OPENNESS.push(option);
         } else {
           // Si no existe se agrega
-          console.log("No existe");
+          //   console.log("No existe");
           this.OPENNESS.push(option);
           this.counter++;
         }
@@ -205,17 +209,45 @@ export default {
             openness: this.OPENNESS,
           },
         },
-        callback: function (data) {
-          //   _this.questions = data.message;
-          // console.log(data.message);
+        freeze: true,
+        callback: function (r) {
+          if (r.message[0]) {
+            // Si se completo correctamente
+            _this.completed = true; // Para mostrar los resultado
+
+            // Descomentar el console si quiere saber la estrucutura retornada por el server
+            _this.dd.datasets[0].values[0] = r.message[1].total_extraversion;
+            _this.dd.datasets[0].values[1] = r.message[1].total_agreeableness;
+            _this.dd.datasets[0].values[2] =
+              r.message[1].total_conscientiousness;
+            _this.dd.datasets[0].values[3] = r.message[1].total_neuroticism;
+            _this.dd.datasets[0].values[4] = r.message[1].total_openness;
+
+            _this.dateTimeTest = r.message[1].datetimetest;
+            _this.userTest = r.message[1].user;
+
+            _this.$forceUpdate();
+
+            new frappe.Chart("#chart", {
+              data: _this.dd,
+              type: "bar",
+              height: 225,
+              animate: 1,
+              colors: ["#0069a1"],
+            });
+
+            _this.$forceUpdate();
+          } else {
+            _this.completed = false;
+          }
+
+          //   console.log(r.message);
         },
       });
     },
-    contar() {
-      console.log("Presiono");
-    },
   },
   computed: {
+    // Clase dinamica para div que refleja el avance del progress bar
     progressForm: function () {
       return `width: ${this.counter}%`;
     },
@@ -224,4 +256,7 @@ export default {
 </script>
 
 <style scoped>
+.texto-res {
+  color: #333c44;
+}
 </style>

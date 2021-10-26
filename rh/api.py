@@ -34,7 +34,7 @@ def complete_test(data):
 
         # Deben completarse las 100 preguntar para completar el proceso
         if total_questions != 100:
-            return False, _(f'<p style="z-index: 9999;">{total_questions} {_("de")} 100 {_("fueron respondidas, por favor responda todas las preguntas y presione completar")}</p>')
+            return False, f'<p style="z-index: 9999;">{total_questions} {_("de")} 100 {_("fueron respondidas, por favor responda todas las preguntas y presione completar")}</p>'
 
         results = {
             'total_extraversion': sum(x['value'] for x in res.get('extraversion')),  # extraversión

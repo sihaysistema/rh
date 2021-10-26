@@ -39,7 +39,7 @@
                 class="btn btn-dark mb-4"
                 @click="complete_test()"
               >
-                {{ __("COMPLETAR") }}
+                {{ __("COMPLETE") }}
               </button>
             </div>
           </div>
@@ -49,9 +49,9 @@
 
     <!-- Resultados -->
     <div v-if="completed === true" class="mb-4">
-      <h3 class="texto-res">Resultados</h3>
-      <p class="texto-res">Fecha y hora: {{ dateTimeTest }}</p>
-      <p class="texto-res">Test completado por: {{ userTest }}</p>
+      <h3 class="texto-res">{{ __("Results") }}</h3>
+      <p class="texto-res">{{ __("Date and Time") }}: {{ dateTimeTest }}</p>
+      <p class="texto-res">{{ __("Test Completed By") }}: {{ userTest }}</p>
     </div>
     <div id="chart"></div>
   </div>
@@ -260,7 +260,7 @@ export default {
             frappe.show_alert(
               {
                 indicator: "red",
-                message: __(r.message[1]),
+                message: r.message[1],
               },
               60
             );

@@ -18,11 +18,27 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Big Five",
+   "label": "Questions",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Big Five Factor Model",
    "link_to": "Big Five Factor Model",
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Tests",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
   },
   {
    "hidden": 0,
@@ -32,9 +48,26 @@
    "link_type": "Page",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Results",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Big Five Results",
+   "link_to": "Big Five Results",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2021-10-04 14:46:44.715257",
+ "modified": "2021-10-25 12:29:40.698138",
  "modified_by": "Administrator",
  "module": "RH",
  "name": "RH",

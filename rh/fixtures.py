@@ -11,7 +11,8 @@ def fill_fixtures():
             [
                 "name", "in", [
                     "Job Opening-personality_profile", "Job Applicant-big_five_results",
-                    "Job Applicant-recommended_profile"
+                    "Job Applicant-recommended_profile", "Job Opening-rh_gender",
+                    "Job Opening-rh_job_location", "Job Opening-rh_employment_status"
                 ]
             ]
         ]

@@ -66,7 +66,7 @@ def fill_fixtures():
         "dt": "Big Five Factor Model"
     }
 
-    # fixtures_fillup.append(custom_fields)
+    fixtures_fillup.append(custom_fields)
     fixtures_fillup.append(translation)
     fixtures_fillup.append(big_five_factor_model)
 

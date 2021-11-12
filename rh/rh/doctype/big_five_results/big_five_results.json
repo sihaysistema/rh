@@ -9,8 +9,11 @@
  "field_order": [
   "completed_by",
   "full_name",
+  "email",
   "date_time",
+  "recommended_profile",
   "results",
+  "recommended_profiles",
   "amended_from"
  ],
  "fields": [
@@ -50,12 +53,29 @@
    "fieldtype": "Data",
    "label": "Full Name",
    "read_only": 1
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "Email"
+  },
+  {
+   "fieldname": "recommended_profile",
+   "fieldtype": "Link",
+   "label": "Recommended Profile",
+   "options": "Personality Profile"
+  },
+  {
+   "fieldname": "recommended_profiles",
+   "fieldtype": "Table",
+   "label": "Recommended Profiles",
+   "options": "Recommended Profiles"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2021-10-25 19:40:05.865129",
+ "modified": "2021-11-11 18:20:20.425870",
  "modified_by": "Administrator",
  "module": "RH",
  "name": "Big Five Results",

@@ -9,7 +9,10 @@ def fill_fixtures():
     custom_fields = {
         "dt": "Custom Field", "filters": [
             [
-                "name", "in", []
+                "name", "in", [
+                    "Job Opening-personality_profile", "Job Applicant-big_five_results",
+                    "Job Applicant-recommended_profile"
+                ]
             ]
         ]
     }

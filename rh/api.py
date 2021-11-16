@@ -6,11 +6,12 @@ import random
 
 import frappe
 from frappe import _
-from frappe.utils import nowdate, get_datetime
+from frappe.utils import nowdate, get_datetime, cint
 
 
 @frappe.whitelist()
 def get_questions():
+    """Retorna las preguntas de BIG5"""
     fields_dt = ['name', 'category', 'key', 'text']
     questions = frappe.db.get_list('Big Five Factor Model',
                                    fields=fields_dt)
@@ -23,18 +24,21 @@ def get_questions():
 
 @frappe.whitelist()
 def complete_test(data):
+    """Endpoint para calcular los resultados BIG5, los resultados se guardan en `Big Five Results`
+    y buscar que perfil de personalidad se adecua a los resultados"""
     try:
         res = json.loads(data)
         # DEBUG:
         # with open('respuestas.json', 'w') as f:
         #     f.write(json.dumps(res, indent=2))
 
+        # Debe ser 100
         total_questions = len(res.get('extraversion')) + len(res.get('agreeableness')) + len(res.get('conscientiousness')) + \
             len(res.get('neuroticism')) + len(res.get('openness'))
 
         # Deben completarse las 100 preguntar para completar el proceso
         if total_questions != 100:
-            return False, f'<p style="z-index: 9999;">{total_questions} {_("de")} 100 {_("fueron respondidas, por favor responda todas las preguntas y presione completar")}</p>'
+            return False, f'{total_questions} {_("de")} 100 {_("fueron respondidas, por favor responda todas las preguntas y presione completar")}'
 
         results = {
             'total_extraversion': sum(x['value'] for x in res.get('extraversion')),  # extraversión
@@ -57,6 +61,29 @@ def complete_test(data):
         #     'datetimetest': str(get_datetime())
         # }
 
+        # Los resultados se asignan a variables, para no repetir el acceso al dict origen
+        res_extraversion = cint(res.get('total_extraversion'))
+        res_agreeableness = cint(res.get('total_agreeableness'))
+        res_conscientiousness = cint(res.get('total_conscientiousness'))
+        res_neuroticism = cint(res.get('total_neuroticism'))
+        res_openness = cint(res.get('total_openness'))
+
+        # Los resultados se comparan con los perfiles de personalidad ya establecidos en ERP para obtener el que mejor
+        # que se adapte a la persona. NOTA: pueden ser varios estos se guardaran en una tabla hija de `Big Five Results`
+        query_str = f"""SELECT PF.name AS profile
+        FROM `tabPersonality Profile` AS PF
+        WHERE
+        ({res_openness} >= PF.minimum_result_for_openness AND {res_openness} <= PF.maximun_result_for_openness) AND
+        ({res_neuroticism} >= PF.minimum_result_for_neuroticism AND {res_neuroticism} <= PF.maximun_result_for_neuroticism) AND
+        ({res_agreeableness} >= PF.minimum_result_for_agreeableness AND {res_agreeableness} <= PF.maximun_result_for_agreeableness) AND
+        ({res_conscientiousness} >= PF.minimum_result_for_conscientiousness AND {res_conscientiousness} <= PF.maximun_result_for_conscientiousness) AND
+        ({res_extraversion} >= PF.minimum_result_for_extraversion AND {res_extraversion} <= PF.maximum_result_for_extraversion);"""
+
+        ok_profiles = frappe.db.sql(query_str, as_dict=True)
+        # DEBUG:
+        # with open('ok_profiles_b5.json', 'w') as f:
+        #     f.write(json.dumps(ok_profiles, indent=2))
+
         # Se registran los resultados
         doc = frappe.get_doc({
             'doctype': 'Big Five Results',
@@ -69,6 +96,7 @@ def complete_test(data):
                 {'category': 'NEUROTICISM', 'score': results.get('total_neuroticism')},
                 {'category': 'OPENNESS', 'score': results.get('total_openness')},
             ],
+            'recommended_profiles': ok_profiles,
             'docstatus': 1
         })
         doc.insert(ignore_permissions=True)

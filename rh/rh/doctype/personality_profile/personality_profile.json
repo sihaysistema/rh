@@ -1,0 +1,151 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "PROFILE-.#######",
+ "creation": "2021-11-10 18:40:47.844136",
+ "description": "Doctype para almacenar los resultados de BIG5",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "designation",
+  "big_five_parameters_section",
+  "minimum_result_for_extraversion",
+  "minimum_result_for_agreeableness",
+  "minimum_result_for_conscientiousness",
+  "minimum_result_for_neuroticism",
+  "minimum_result_for_openness",
+  "column_break_4",
+  "maximum_result_for_extraversion",
+  "maximun_result_for_agreeableness",
+  "maximun_result_for_conscientiousness",
+  "maximun_result_for_neuroticism",
+  "maximun_result_for_openness",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Personality Profile",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Personality Profile",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "designation",
+   "fieldtype": "Link",
+   "label": "Designation",
+   "options": "Designation",
+   "search_index": 1
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "big_five_parameters_section",
+   "fieldtype": "Section Break",
+   "label": "Big Five Parameters"
+  },
+  {
+   "fieldname": "minimum_result_for_extraversion",
+   "fieldtype": "Int",
+   "label": "Minimum Result for Extraversion"
+  },
+  {
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "maximum_result_for_extraversion",
+   "fieldtype": "Int",
+   "label": "Maximum Result for Extraversion"
+  },
+  {
+   "fieldname": "minimum_result_for_agreeableness",
+   "fieldtype": "Int",
+   "label": "Minimum Result for Agreeableness"
+  },
+  {
+   "fieldname": "minimum_result_for_conscientiousness",
+   "fieldtype": "Int",
+   "label": "Minimum Result for Conscientiousness"
+  },
+  {
+   "fieldname": "minimum_result_for_neuroticism",
+   "fieldtype": "Int",
+   "label": "Minimum Result for Neuroticism"
+  },
+  {
+   "fieldname": "minimum_result_for_openness",
+   "fieldtype": "Int",
+   "label": "Minimum Result for Openness"
+  },
+  {
+   "fieldname": "maximun_result_for_agreeableness",
+   "fieldtype": "Int",
+   "label": "Maximun Result for Agreeableness"
+  },
+  {
+   "fieldname": "maximun_result_for_conscientiousness",
+   "fieldtype": "Int",
+   "label": "Maximun Result for Conscientiousness"
+  },
+  {
+   "fieldname": "maximun_result_for_neuroticism",
+   "fieldtype": "Int",
+   "label": "Maximun Result for Neuroticism"
+  },
+  {
+   "fieldname": "maximun_result_for_openness",
+   "fieldtype": "Int",
+   "label": "Maximun Result for Openness"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2021-11-11 15:50:11.654524",
+ "modified_by": "Administrator",
+ "module": "RH",
+ "name": "Personality Profile",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Administrator",
+   "set_user_permissions": 1,
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "RH-L3",
+   "select": 1,
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

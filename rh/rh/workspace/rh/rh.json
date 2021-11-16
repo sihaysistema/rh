@@ -1,5 +1,5 @@
 {
- "cards_label": "Psychometric Tests",
+ "cards_label": "RH",
  "category": "Modules",
  "charts": [],
  "creation": "2021-09-17 16:58:39.832455",
@@ -18,7 +18,7 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Questions",
+   "label": "Parameters",
    "link_type": "DocType",
    "onboard": 0,
    "type": "Card Break"
@@ -28,6 +28,15 @@
    "is_query_report": 0,
    "label": "Big Five Factor Model",
    "link_to": "Big Five Factor Model",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Personality Profile",
+   "link_to": "Personality Profile",
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
@@ -67,7 +76,7 @@
    "type": "Link"
   }
  ],
- "modified": "2021-10-25 12:29:40.698138",
+ "modified": "2021-11-12 11:12:10.139330",
  "modified_by": "Administrator",
  "module": "RH",
  "name": "RH",

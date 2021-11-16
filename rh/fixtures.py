@@ -9,7 +9,11 @@ def fill_fixtures():
     custom_fields = {
         "dt": "Custom Field", "filters": [
             [
-                "name", "in", []
+                "name", "in", [
+                    "Job Opening-personality_profile", "Job Applicant-big_five_results",
+                    "Job Applicant-recommended_profile", "Job Opening-rh_gender",
+                    "Job Opening-rh_job_location", "Job Opening-rh_employment_status"
+                ]
             ]
         ]
     }
@@ -63,7 +67,7 @@ def fill_fixtures():
         "dt": "Big Five Factor Model"
     }
 
-    # fixtures_fillup.append(custom_fields)
+    fixtures_fillup.append(custom_fields)
     fixtures_fillup.append(translation)
     fixtures_fillup.append(big_five_factor_model)
 

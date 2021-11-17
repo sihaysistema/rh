@@ -57,7 +57,11 @@ def fill_fixtures():
                     "Do not have a good imagination.", "Try to avoid complex people.", "Have difficulty imagining things.",
                     "Avoid difficult reading material.", "Will not probe deeply into a subject.", "Very Inaccurate",
                     "Moderately Inaccurate", "Neither Inaccurate nor Accurate", "Moderately Accurate", "Very Accurate",
-                    "Test Completed By", "Date and Time"
+                    "Test Completed By", "Date and Time", "Personality Profile", "Big Five Parameters", "Minimum Result for Extraversion",
+                    "Maximum Result for Extraversion", "Minimum Result for Agreeableness", "Maximun Result for Agreeableness",
+                    "Minimum Result for Conscientiousness", "Maximun Result for Conscientiousness", "Minimum Result for Neuroticism",
+                    "Maximun Result for Neuroticism", "Minimum Result for Openness", "Maximun Result for Openness", "Employment Status",
+                    "RH: Select a profile", "Job Location", "RH - Example: Guatemala"
                 ]
             ]
         ]

@@ -5,19 +5,14 @@
         <div class="row">
           <div class="col-sm-10 position-fixed">
             <!-- Barra de progreso -->
-            <div
-              class="progress mb-4 mt-4"
-              style="height: 20px"
-              v-if="completed === false"
-            >
+            <div class="progress mb-4 mt-4" style="height: 20px" v-if="completed === false">
               <div
                 class="progress-bar"
                 role="progressbar"
                 :style="progressForm"
                 :aria-valuenow="counter"
                 aria-valuemin="0"
-                aria-valuemax="100"
-              >
+                aria-valuemax="100">
                 {{ counter }}%
               </div>
             </div>
@@ -25,20 +20,15 @@
           <!-- DIVISION -->
           <div class="col-sm-8">
             <div class="separacion">
-              <!-- Preguntas -->
+              <!-- Inicio renderizacion de preguntas -->
               <Question
                 v-for="(question, index) in questions"
                 :key="question.name"
                 :question="question"
                 :counter="index + 1"
-                @selected="optSelected($event)"
-              />
+                @selected="optSelected($event)" />
 
-              <button
-                type="button"
-                class="btn btn-dark mb-4"
-                @click="complete_test()"
-              >
+              <button type="button" class="btn btn-dark mb-4" @click="complete_test()">
                 {{ __("COMPLETE") }}
               </button>
             </div>
@@ -47,12 +37,14 @@
       </div>
     </div>
 
-    <!-- Resultados -->
+    <!-- Seccion Resultados -->
     <div v-if="completed === true" class="mb-4">
       <h3 class="texto-res">{{ __("Results") }}</h3>
       <p class="texto-res">{{ __("Date and Time") }}: {{ dateTimeTest }}</p>
       <p class="texto-res">{{ __("Test Completed By") }}: {{ userTest }}</p>
     </div>
+
+    <!-- Seccion render de grafica con resultados de la prueba -->
     <div id="chart"></div>
   </div>
 </template>
@@ -78,18 +70,12 @@ export default {
       NEUROTICISM: [],
       OPENNESS: [],
       dd: {
-        labels: [
-          __("EXTRAVERSION"),
-          __("AGREEABLENESS"),
-          __("CONSCIENTIOUSNESS"),
-          __("NEUROTICISM"),
-          __("OPENNESS"),
-        ],
+        labels: [__("EXTRAVERSION"), __("AGREEABLENESS"), __("CONSCIENTIOUSNESS"), __("NEUROTICISM"), __("OPENNESS")],
         datasets: [{ values: [0, 0, 0, 0, 0] }], // Valores default para graficas
       },
     };
   },
-  // Al montarse el componente se obtiene todas las preguntas a mostrar
+  // Al montarse el componente se obtiene todas las preguntas a mostrar en la prueba
   mounted() {
     let _this = this;
 
@@ -103,6 +89,8 @@ export default {
   },
   methods: {
     // Emision de eventos: ver componente Question.vue => emitirEvento()
+    // Segun la opcion que marque el usuario se van a ir agrupando por categoria BIG5
+    // Evitando duplicados
     optSelected(option) {
       //   console.log("Seleccionó: ", JSON.stringify(option));
       if (option.category === "EXTRAVERSION") {
@@ -148,9 +136,7 @@ export default {
         // console.log("ES CONSCIENTIOUSNESS");
 
         // Si el elemento ya existe en el array, se elimina y se vuelve a agregar
-        let index = this.CONSCIENTIOUSNESS.findIndex(
-          (x) => x.name === option.name
-        );
+        let index = this.CONSCIENTIOUSNESS.findIndex((x) => x.name === option.name);
 
         // Si el valor ya existe en el array, se elimina para volverlo a agregarlo
         // asi asegurar que los calculos se generen correctamente
@@ -212,6 +198,8 @@ export default {
         return el.name === name; // true/false
       });
     },
+    // Se ejecuta al presionar el boton completar, las opciones seleccionadas se mandan al backend
+    // para ser validadas, guardadas y comparadas con los perfiles de personalidad adecuados
     complete_test() {
       let _this = this;
 
@@ -235,8 +223,7 @@ export default {
             // Descomentar el console si quiere saber la estrucutura retornada por el server
             _this.dd.datasets[0].values[0] = r.message[1].total_extraversion;
             _this.dd.datasets[0].values[1] = r.message[1].total_agreeableness;
-            _this.dd.datasets[0].values[2] =
-              r.message[1].total_conscientiousness;
+            _this.dd.datasets[0].values[2] = r.message[1].total_conscientiousness;
             _this.dd.datasets[0].values[3] = r.message[1].total_neuroticism;
             _this.dd.datasets[0].values[4] = r.message[1].total_openness;
 

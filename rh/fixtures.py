@@ -61,7 +61,7 @@ def fill_fixtures():
                     "Maximum Result for Extraversion", "Minimum Result for Agreeableness", "Maximun Result for Agreeableness",
                     "Minimum Result for Conscientiousness", "Maximun Result for Conscientiousness", "Minimum Result for Neuroticism",
                     "Maximun Result for Neuroticism", "Minimum Result for Openness", "Maximun Result for Openness", "Employment Status",
-                    "RH: Select a profile", "Job Location", "RH - Example: Guatemala"
+                    "RH: Select a profile", "Job Location", "RH - Example: Guatemala", "Completed From", "Recommended Profiles", "Profile"
                 ]
             ]
         ]

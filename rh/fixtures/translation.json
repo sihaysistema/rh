@@ -2206,5 +2206,53 @@
   "parenttype": null,
   "source_text": "RH - Example: Guatemala",
   "translated_text": "RH - Ejemplo: Guatemala"
+ },
+ {
+  "context": null,
+  "contributed": 0,
+  "contribution_docname": null,
+  "contribution_status": "",
+  "docstatus": 0,
+  "doctype": "Translation",
+  "language": "es",
+  "modified": "2022-01-25 15:55:22.245818",
+  "name": "a92803867c",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "source_text": "Completed From",
+  "translated_text": "Completado Desde"
+ },
+ {
+  "context": null,
+  "contributed": 0,
+  "contribution_docname": null,
+  "contribution_status": "",
+  "docstatus": 0,
+  "doctype": "Translation",
+  "language": "es",
+  "modified": "2022-01-25 15:55:52.501586",
+  "name": "166cf7f4af",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "source_text": "Recommended Profiles",
+  "translated_text": "Perfiles Recomendados"
+ },
+ {
+  "context": null,
+  "contributed": 0,
+  "contribution_docname": null,
+  "contribution_status": "",
+  "docstatus": 0,
+  "doctype": "Translation",
+  "language": "es",
+  "modified": "2022-01-25 15:56:17.240177",
+  "name": "fe0f5379c5",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "source_text": "Profile",
+  "translated_text": "Perfil"
  }
 ]

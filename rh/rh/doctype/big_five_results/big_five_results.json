@@ -11,7 +11,10 @@
   "full_name",
   "email",
   "date_time",
+  "column_break_5",
+  "completed_from",
   "recommended_profile",
+  "section_break_8",
   "results",
   "recommended_profiles",
   "amended_from"
@@ -57,6 +60,7 @@
   {
    "fieldname": "email",
    "fieldtype": "Data",
+   "in_standard_filter": 1,
    "label": "Email"
   },
   {
@@ -68,14 +72,31 @@
   {
    "fieldname": "recommended_profiles",
    "fieldtype": "Table",
+   "in_standard_filter": 1,
    "label": "Recommended Profiles",
    "options": "Recommended Profiles"
+  },
+  {
+   "fieldname": "column_break_5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "completed_from",
+   "fieldtype": "Select",
+   "in_standard_filter": 1,
+   "label": "Completed From",
+   "options": "ERP\nWebsite",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_8",
+   "fieldtype": "Section Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2021-11-11 18:20:20.425870",
+ "modified": "2022-01-25 15:52:40.376513",
  "modified_by": "Administrator",
  "module": "RH",
  "name": "Big Five Results",
@@ -91,6 +112,7 @@
    "read": 1,
    "report": 1,
    "role": "Administrator",
+   "select": 1,
    "set_user_permissions": 1,
    "share": 1,
    "submit": 1,
@@ -110,6 +132,14 @@
    "share": 1,
    "submit": 1,
    "write": 1
+  },
+  {
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "RH-L2",
+   "select": 1,
+   "share": 1
   }
  ],
  "sort_field": "modified",

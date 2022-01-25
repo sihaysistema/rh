@@ -22,6 +22,7 @@ def get_questions():
     return questions
 
 
+# Nota: este endpoint solo se consume desde ERPnext
 @frappe.whitelist()
 def complete_test(data):
     """Endpoint para calcular los resultados BIG5, los resultados se guardan en `Big Five Results`
@@ -87,6 +88,7 @@ def complete_test(data):
         # Se registran los resultados
         doc = frappe.get_doc({
             'doctype': 'Big Five Results',
+            'completed_from': 'ERP',
             'completed_by': frappe.session.user,
             'date_time': results.get('datetimetest'),
             'results': [
@@ -104,7 +106,7 @@ def complete_test(data):
         return True, results
 
     except:
-        frappe.msgprint(msg=_(f'Calculo no pudo ser completado, copie o tome una captura de pantalla completo de todo este mensaje, \
-            para ayudarlo lo mas pronto posible. \n <hr> <code>{frappe.get_traceback()}</code>'),
+        frappe.msgprint(msg=_(f'Calculo no pudo ser completado, si la falla persiste copie o tome una captura de pantalla completo de todo este mensaje, \
+            y reportelo con soporte. \n <hr> <code>{frappe.get_traceback()}</code>'),
                         title=_('Process not completed'), indicator='red')
 

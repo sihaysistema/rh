@@ -4,11 +4,7 @@
 
     <!-- SI la pregunta es de `key` POSITIVA -->
     <div class="positive_keys mb-2" v-if="question.key === 'POS'">
-      <div
-        class="custom-control custom-radio"
-        v-for="option in positive_keys"
-        :key="option.text"
-      >
+      <div class="custom-control custom-radio" v-for="option in positive_keys" :key="option.text">
         <input
           type="radio"
           :id="[question.name + '-' + option.value]"
@@ -16,24 +12,14 @@
           class="custom-control-input"
           :value="option"
           v-model="selected"
-          @change="emitirEvento"
-        />
-        <label
-          class="custom-control-label"
-          :for="[question.name + '-' + option.value]"
-        >
-          {{ __(option.text) }}</label
-        >
+          @change="emitirEvento" />
+        <label class="custom-control-label" :for="[question.name + '-' + option.value]"> {{ __(option.text) }}</label>
       </div>
     </div>
 
     <!-- SI la pregunta es de `key` NEGATIVA -->
     <div class="positive_keys mb-2" v-if="question.key === 'NEG'">
-      <div
-        class="custom-control custom-radio"
-        v-for="option in negative_keys"
-        :key="option.text"
-      >
+      <div class="custom-control custom-radio" v-for="option in negative_keys" :key="option.text">
         <input
           type="radio"
           :id="[question.name + '-' + option.value]"
@@ -41,14 +27,8 @@
           class="custom-control-input"
           :value="option"
           v-model="selected"
-          @change="emitirEvento"
-        />
-        <label
-          class="custom-control-label"
-          :for="[question.name + '-' + option.value]"
-        >
-          {{ __(option.text) }}</label
-        >
+          @change="emitirEvento" />
+        <label class="custom-control-label" :for="[question.name + '-' + option.value]"> {{ __(option.text) }}</label>
       </div>
     </div>
 
@@ -80,7 +60,7 @@ export default {
     };
   },
   methods: {
-    // Emite evento al componente padre, pasando el dato seleccionado
+    // Emite evento al componente padre, pasando el dato que marque el usuario
     emitirEvento() {
       this.valueForCalculations = {
         category: this.question.category,
